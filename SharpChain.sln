@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpChain.Domain", "SharpChain.Domain\SharpChain.Domain.csproj", "{D58D9A0A-D750-4177-8591-A482F6E8EB29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpChain.Tests", "SharpChain.Tests\SharpChain.Tests.csproj", "{4FA67A1A-0C7A-411B-B2C4-8C1EFF923275}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D58D9A0A-D750-4177-8591-A482F6E8EB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58D9A0A-D750-4177-8591-A482F6E8EB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D58D9A0A-D750-4177-8591-A482F6E8EB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58D9A0A-D750-4177-8591-A482F6E8EB29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA67A1A-0C7A-411B-B2C4-8C1EFF923275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA67A1A-0C7A-411B-B2C4-8C1EFF923275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA67A1A-0C7A-411B-B2C4-8C1EFF923275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA67A1A-0C7A-411B-B2C4-8C1EFF923275}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC82532E-0361-4021-935A-1F56CDB9E6EE}
+	EndGlobalSection
+EndGlobal
