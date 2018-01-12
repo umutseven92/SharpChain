@@ -7,58 +7,48 @@ namespace SharpChain.Domain
 {
 	public class Controller
 	{
-		private readonly Blockchain chain;
-		private readonly Guid NodeID;
-
-		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private readonly Blockchain _chain;
+		private readonly Guid _nodeId;
 
 
 		public Controller()
 		{
-			chain = new Blockchain();
-			NodeID = Guid.NewGuid();
+			_chain = new Blockchain();
+			_nodeId = Guid.NewGuid();
 		}
 
 		public void Mine()
 		{
-			var lastBlock = chain.LastBlock;
+			var lastBlock = _chain.LastBlock;
 			var lastProof = lastBlock.Proof;
 
-			Log.Info("Mining new coin..");
+			var proof = _chain.ProofOfWork(lastProof);
 
-			var watch = new Stopwatch();
+			CreateTransaction("0", _nodeId.ToString(), 1);
 
-			watch.Start();
-			var proof = chain.ProofOfWork(lastProof);
-			watch.Stop();
-
-			Log.Info($"New block mined. It took {watch.Elapsed.Seconds}.{watch.ElapsedMilliseconds} seconds.");
-
-			CreateTransaction("0", NodeID.ToString(), 1);
-
-			chain.CreateNewBlock(proof);
+			_chain.CreateNewBlock(proof);
 		}
 
 		public int CreateTransaction(string sender, string recipient, decimal amount)
 		{
-			var index = chain.CreateNewTransaction(sender, recipient, amount);
+			var index = _chain.CreateNewTransaction(sender, recipient, amount);
 
 			return index;
 		}
 
 		public string GetFullChainJson()
 		{
-			return chain.ToString();
+			return _chain.ToString();
 		}
 
 		public Blockchain GetFullChain()
 		{
-			return chain;
+			return _chain;
 		}
 
 		public Block GetLastBlock()
 		{
-			return chain.LastBlock;
+			return _chain.LastBlock;
 		}
 		
 	}

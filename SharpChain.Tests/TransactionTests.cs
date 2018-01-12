@@ -1,25 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpChain.Domain;
 
 namespace SharpChain.Tests
 {
 	[TestClass]
-	public class Tests
+	public class TransactionTests
 	{
-		[TestMethod]
-		public void CanMine()
-		{
-			var controller = new Controller();
-
-			controller.Mine();
-			controller.Mine();
-
-			var chain = controller.GetFullChain();
-
-			Assert.AreEqual(chain.Length, 3);
-		}
-
 		[TestMethod]
 		public void CanAddTransaction()
 		{
