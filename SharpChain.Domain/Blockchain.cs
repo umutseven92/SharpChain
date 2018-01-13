@@ -10,30 +10,24 @@ namespace SharpChain.Domain
 {
 	public class Blockchain: IEnumerable<Block>
 	{
-		private readonly List<Block> chain;
-		private readonly List<Transaction> transactions;
+		private readonly List<Block> _chain;
+		private readonly List<Transaction> _transactions;
 
 		// The amount of zeros that must be at the end of the hash for it to be valid.
 		// Used to verify Proof of Work.
 		private const int Difficulty = 4;
 
-		public Block LastBlock
-		{
-			get { return chain.Last(); }
-		}
+		public Block LastBlock => _chain.Last();
 
-		public int Length
-		{
-			get { return chain.Count; }
-		}
+		public int Length => _chain.Count;
 
 		public Block this[int index]
 		{
 			get
 			{
-				if (index >= 0 && index < chain.Count)
+				if (index >= 0 && index < _chain.Count)
 				{
-					return chain[index];
+					return _chain[index];
 				}
 
 				if (index == -1)
@@ -47,8 +41,8 @@ namespace SharpChain.Domain
 
 		public Blockchain()
 		{
-			chain = new List<Block>();
-			transactions = new List<Transaction>();
+			_chain = new List<Block>();
+			_transactions = new List<Transaction>();
 
 			CreateNewBlock(100);
 		}
@@ -57,16 +51,16 @@ namespace SharpChain.Domain
 		{
 			var block = new Block()
 			{
-				Index = chain.Count,
+				Index = _chain.Count,
 				Proof = proof,
-				PreviousHash = chain.Count == 0 ? "1" : HashBlock(chain.Last()),
-				Transactions = new List<Transaction>(transactions),
+				PreviousHash = _chain.Count == 0 ? "1" : HashBlock(_chain.Last()),
+				Transactions = new List<Transaction>(_transactions),
 				TimeStamp = DateTimeOffset.Now.ToUnixTimeSeconds(),
 			};
 
-			transactions.Clear();
+			_transactions.Clear();
 
-			chain.Add(block);
+			_chain.Add(block);
 		}
 
 		public int CreateNewTransaction(string sender, string recipient, decimal amount)
@@ -78,7 +72,7 @@ namespace SharpChain.Domain
 				Sender = sender
 			};
 
-			transactions.Add(transaction);
+			_transactions.Add(transaction);
 
 			// Return the index for the next block to be mined, thats where the transaction will be added to
 			return LastBlock.Index + 1;
@@ -140,7 +134,7 @@ namespace SharpChain.Domain
 
 		public IEnumerator<Block> GetEnumerator()
 		{
-			return chain.GetEnumerator();
+			return _chain.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
