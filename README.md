@@ -15,11 +15,11 @@ in the folder where the .sln file is.
 ## API Reference
 
 | Query                       | Description|
-| -------------               |:-------------:|
+| -------------               |-------------|
 | _SharpChain/Register_        | Gets the user an ID to use with their requests. |
 | _SharpChain/Mine/{**ID**}_        | Mines a block using the [Hashcash](https://en.wikipedia.org/wiki/Hashcash) algorithm. The default difficuly is 4, and the reward is 1 SharpCoin.                                  |
-| _SharpChain/GetBalance/{**ID**}_  | Gets the balance of {ID}.                         |
-| _SharpChain/SendCoin/{**senderID**}/{**recipientID**}/{**amount**}_| Send {amount} of SharpCoins to {recipientID}. The {senderID} should be your ID. |
+| _SharpChain/GetBalance/{**ID**}_  | Gets the balance of {**ID**}.                         |
+| _SharpChain/SendCoin/{**senderID**}/{**recipientID**}/{**amount**}_| Send {**amount**} of SharpCoins to {**recipientID**}. The {**senderID**} should be your ID. |
 | _SharpChain/GetChain_         | Gets the whole blockchain as JSON. |
 
 ## How to Use
