@@ -48,3 +48,8 @@ If anytime, you want to see the whole chain, you can do:
 ```bash
 localhost:9532/SharpChain/GetChain
 ```
+
+## What Is Missing?
+⋅⋅* Consensus
+⋅⋅* Persistance
+⋅⋅* UI
