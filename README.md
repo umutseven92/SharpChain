@@ -50,6 +50,6 @@ localhost:9532/SharpChain/GetChain
 ```
 
 ## What Is Missing?
-⋅⋅* Consensus
-⋅⋅* Persistance
-⋅⋅* UI
+* Consensus
+* Persistance
+* UI
