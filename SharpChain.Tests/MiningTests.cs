@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpChain.Domain;
 
@@ -13,9 +11,10 @@ namespace SharpChain.Tests
 		[TestMethod]
 		public void CanMine()
 		{
-			var controller = new Controller();
+			var controller = new ChainAuthority();
 
-			controller.Mine();
+			var id = Guid.NewGuid();
+			controller.Mine(id.ToString());
 
 			var chain = controller.GetFullChain();
 
@@ -23,10 +22,11 @@ namespace SharpChain.Tests
 		}
 
 		[TestMethod]
+		[Ignore]
 		public void MiningBenchmark()
 		{
-			var controller = new Controller();
-
+			var controller = new ChainAuthority();
+			var id = Guid.NewGuid();
 			const int mineAmount = 10;
 
 			TimeSpan span;
@@ -35,7 +35,7 @@ namespace SharpChain.Tests
 			for (var i = 0; i < mineAmount; i++)
 			{
 				watch.Start();
-				controller.Mine();
+				controller.Mine(id.ToString());
 				watch.Stop();
 				span += watch.Elapsed;
 

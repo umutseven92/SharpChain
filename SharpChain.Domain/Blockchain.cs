@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -7,11 +8,13 @@ using Newtonsoft.Json;
 
 namespace SharpChain.Domain
 {
-	public class Blockchain
+	public class Blockchain: IEnumerable<Block>
 	{
 		private readonly List<Block> chain;
 		private readonly List<Transaction> transactions;
 
+		// The amount of zeros that must be at the end of the hash for it to be valid.
+		// Used to verify Proof of Work.
 		private const int Difficulty = 4;
 
 		public Block LastBlock
@@ -50,9 +53,8 @@ namespace SharpChain.Domain
 			CreateNewBlock(100);
 		}
 
-		public Block CreateNewBlock(long proof)
+		public void CreateNewBlock(long proof)
 		{
-
 			var block = new Block()
 			{
 				Index = chain.Count,
@@ -65,8 +67,6 @@ namespace SharpChain.Domain
 			transactions.Clear();
 
 			chain.Add(block);
-
-			return block;
 		}
 
 		public int CreateNewTransaction(string sender, string recipient, decimal amount)
@@ -80,6 +80,7 @@ namespace SharpChain.Domain
 
 			transactions.Add(transaction);
 
+			// Return the index for the next block to be mined, thats where the transaction will be added to
 			return LastBlock.Index + 1;
 		}
 
@@ -132,10 +133,19 @@ namespace SharpChain.Domain
 			return sb.ToString();
 		}
 
-
 		public override string ToString()
 		{
 			return JsonConvert.SerializeObject(this);
+		}
+
+		public IEnumerator<Block> GetEnumerator()
+		{
+			return chain.GetEnumerator();
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
 		}
 	}
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpChain.Domain;
 
@@ -13,10 +11,12 @@ namespace SharpChain.Tests
 		[TestMethod]
 		public void CanAddTransaction()
 		{
-			var controller = new Controller();
+			var controller = new ChainAuthority();
 
 			var index = controller.CreateTransaction("ABC", "DEF", 1500432);
-			controller.Mine();
+
+			var id = Guid.NewGuid();
+			controller.Mine(id.ToString());
 
 			var transaction = controller.GetFullChain()[index].Transactions
 				.FirstOrDefault(d => d.Sender == "ABC" && d.Recipient == "DEF" && d.Amount == 1500432);
