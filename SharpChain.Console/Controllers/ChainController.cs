@@ -22,7 +22,7 @@ namespace SharpChain.Console.Controllers
 		{
 			var id = Guid.NewGuid();
 
-			return id.ToString();
+			return $"Your ID is {id.ToString()}\nPlease keep this hidden!";
 		}
 
 		[HttpPost("Mine/{id}")]
@@ -49,6 +49,26 @@ namespace SharpChain.Console.Controllers
 			var balance = _chainAuthority.GetBalance(id);
 
 			return balance;
+		}
+
+		[HttpPost("SendCoin/{senderId}/{recipientId}/{amount}")]
+		public string SendCoin([FromRoute]string senderId, [FromRoute]string recipientId, [FromRoute]decimal amount)
+		{
+			if (string.IsNullOrEmpty(senderId) || string.IsNullOrEmpty(recipientId) || amount <= 0)
+			{
+				return "Please provide a valid ID and amount with your request.";
+			}
+
+			var canSend = _chainAuthority.CanSend(senderId, amount);
+
+			if (!canSend)
+			{
+				return $"Your balance is not sufficient to send {amount}.";
+			}
+
+			_chainAuthority.CreateTransaction(senderId, recipientId, amount);
+
+			return $"{amount} SharpCoin has been sent to {recipientId}.";
 		}
 
 		[HttpGet("GetChain")]
