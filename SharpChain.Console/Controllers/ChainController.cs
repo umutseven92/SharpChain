@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SharpChain.Domain;
@@ -21,6 +22,7 @@ namespace SharpChain.Console.Controllers
 		public string Register()
 		{
 			var id = Guid.NewGuid();
+			_logger.LogInformation($"{id} has been registered.");
 
 			return $"Your ID is {id.ToString()}\nPlease keep this hidden!";
 		}
@@ -33,7 +35,15 @@ namespace SharpChain.Console.Controllers
 				return "Please provide your ID with your request.";
 			}
 
+			_logger.LogInformation($"{id} started mining.");
+
+			var timer = new Stopwatch();
+			timer.Start();
 			var reward = _chainAuthority.Mine(id);
+			timer.Stop();
+
+			_logger.LogInformation($"{id} finished mining. It took {timer.Elapsed.ToString()}.");
+
 
 			return $"A Block was mined. {reward} SharpCoin has been awarded to {id}.";
 		}
@@ -67,6 +77,8 @@ namespace SharpChain.Console.Controllers
 			}
 
 			_chainAuthority.CreateTransaction(senderId, recipientId, amount);
+	
+			_logger.LogInformation($"{senderId} sent {amount} SharpCoin to {recipientId}.");
 
 			return $"{amount} SharpCoin has been sent to {recipientId}.";
 		}
