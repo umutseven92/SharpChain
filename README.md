@@ -1,5 +1,5 @@
 # SharpChain
-SharpChain is a simple block chain implementation for educational purposes, written in C#. It is a simpler, smaller model of the Bitcoin block chain. I believe it makes it easier to see how the block chain actually works nicely.
+SharpChain is a simple blockchain implementation for educational purposes, written in C#. It is a simpler, smaller model of the Bitcoin blockchain. I believe it makes it easier to see how the blockchain actually works nicely.
 
 ## Prerequisites
 .NET Core 2.0 SDK
@@ -29,7 +29,7 @@ First you need to get and ID, like so:
 localhost:9532/SharpChain/Register
 ```
 This will return an ID, like _723e83c4-8f43-4e96-a1e2-af895d041a46_.
-After that, SharpChain works exactly like the Bitcoin block chain. You need to mine blocks with:
+After that, SharpChain works exactly like the Bitcoin blockchain. You need to mine blocks with:
 ```bash
 localhost:9532/SharpChain/Mine/723e83c4-8f43-4e96-a1e2-af895d041a46
 ```
